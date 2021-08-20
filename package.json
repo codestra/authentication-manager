@@ -1,0 +1,58 @@
+{
+  "name": "@codestra/authentication-manager",
+  "version": "1.1.4",
+  "description": "Full authentication helper functions",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "test:dev": "jest --config jestconfig.dev.json --watch",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags",
+    "dev": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codestra/authentication-manager.git"
+  },
+  "keywords": [
+    "mongoose",
+    "authentication"
+  ],
+  "author": "codestra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codestra/authentication-manager/issues"
+  },
+  "homepage": "https://github.com/codestra/authentication-manager#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "codecov": "^3.1.0",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.4",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.3.5"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "@babel/preset-env": "^7.14.8",
+    "@types/jsonwebtoken": "^8.5.5",
+    "babel-jest": "^27.0.6",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb-memory-server": "^7.3.2",
+    "mongoose": "^5.13.3",
+    "tslint": "^6.1.3"
+  },
+  "publishConfig": {
+    "@codestra:registry": "https://npm.pkg.github.com"
+  }
+}
