@@ -12,8 +12,8 @@ jobs:
       packages: write 
     steps:
       - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.ADMIN_TOKEN }}
+        # with:
+        #   token: ${{ secrets.ADMIN_TOKEN }}
       # - uses: actions/setup-node@v2
       #   with:
       #     node-version: '14'
