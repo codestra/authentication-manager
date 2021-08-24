@@ -1,11 +1,22 @@
 name: Node.js Package
 on:
-  release:
-    types: [created]
-  # push:
-  #   branches:
-  #     - master
+  # release:
+  #   types: [created]
+  push:
+    branches:
+      - master
+
 jobs:
+  version:
+    runs-on: ubuntu-latest 
+    permissions: 
+      contents: read
+      packages: write 
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn version --patch
+
   build:
     runs-on: ubuntu-latest 
     permissions: 
