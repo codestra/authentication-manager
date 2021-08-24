@@ -1,12 +1,13 @@
-// import { MongoClient } from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
+
 process.env = { PASSWORD_RESET_EXPIRES: '8640000', JWT_EXPIRES: '9999y', JWT_SECRET: '123123' };
 import { modelSignUp } from '../index';
-import UserModel from '../mocks/model';
+import MockModel from '../mocks/model';
+
+import * as cryptography from '../crypotography/hashing';
 
 describe('modelSignUp', () => {
-  // let con: MongoClient;
   let mongoServer: MongoMemoryServer;
 
   beforeAll(async () => {
@@ -15,9 +16,6 @@ describe('modelSignUp', () => {
   });
 
   afterAll(async () => {
-    // if (con) {
-    //   await con.close();
-    // }
     if (mongoServer) {
       await mongoServer.stop();
       await mongoose.disconnect();
@@ -25,12 +23,46 @@ describe('modelSignUp', () => {
   });
 
   it('should sign up the model', async () => {
-    await modelSignUp({
-      Model: UserModel,
+    const result = await modelSignUp({
+      Model: MockModel,
       variables: { email: 'sajad.ghawami@codestra.io', password: '123123' },
-      onCompleted: ({ _id }) => {
-        expect(_id).toBe(_id);
-      },
     });
+
+    const data = await MockModel.findOne();
+    expect(data._id.toString()).toBe(result._id);
+  });
+
+  it('should throw an duplicate key error', async () => {
+    await expect(async () => {
+      await modelSignUp({
+        Model: MockModel,
+        variables: { email: 'sajad.ghawami@codestra.io', password: '123123' },
+      });
+    }).rejects.toThrowErrorMatchingSnapshot();
+  });
+
+  it('should throw an error', async () => {
+    jest.spyOn(cryptography, 'createHash').mockImplementationOnce(() => {
+      throw new Error('MOCKED_ERROR');
+    });
+
+    await expect(async () => {
+      await modelSignUp({
+        Model: MockModel,
+        variables: { email: 'sajad.ghawami2@codestra.io', password: '123123' },
+      });
+    }).rejects.toThrowErrorMatchingSnapshot();
+  });
+
+  it('should call the onComplete callback', async () => {
+    const onCompleted = jest.fn();
+
+    await modelSignUp({
+      Model: MockModel,
+      variables: { email: 'sajad.ghawami1@codestra.io', password: '123123' },
+      onCompleted,
+    });
+
+    expect(onCompleted).toBeCalled();
   });
 });

@@ -10,7 +10,7 @@ import { ERROR_DUPLICATE_EMAIL } from './ErrorCodes';
  * @param {string} parameters.variables.email the email which will be used for registration made lowercase
  * @param {string} parameters.variables.password the password
  * @param {function({string, string}):void}  parameters.onCompleted callback on completed. Returns the _id
- * @returns {Promise<string| Error>} the _id as a string
+ * @returns {Promise<{ activationToken: string; _id: string }>} the _id as a string
  */
 const modelSignUp = async ({
   Model,
@@ -20,7 +20,7 @@ const modelSignUp = async ({
   Model: mongoose.Model<any>;
   variables: { password: string; email: string };
   onCompleted?: ({ activationToken, _id }: { activationToken: string; _id: string }) => void;
-}): Promise<string | Error> => {
+}): Promise<{ activationToken: string; _id: string }> => {
   try {
     // hash the password
     const hashedObject: any = createHash(password);
@@ -41,7 +41,7 @@ const modelSignUp = async ({
     if (onCompleted) {
       onCompleted({ activationToken, _id: model._id.toString() });
     }
-    return model._id.toString();
+    return { _id: model._id.toString(), activationToken };
   } catch (error: any) {
     // duplicate key
     if (error.code === 11000) {

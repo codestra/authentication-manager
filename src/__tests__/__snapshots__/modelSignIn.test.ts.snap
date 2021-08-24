@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modelSignUp should sign in the model but throw an error when not activated 1`] = `"Error: ERROR_ACCOUNT_NOT_ACTIVATED"`;
+
+exports[`modelSignUp should throw an error on wrong credentials 1`] = `"Error: ERROR_WRONG_CREDENTIALS"`;
+
+exports[`modelSignUp should throw an error on wrong credentials 2`] = `"Error: ERROR_WRONG_CREDENTIALS"`;

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`environment should throw an error if not all environment variables JWT_SECRET, JWT_EXPIRES and PASSWORD_RESET_EXPIRES have been set 1`] = `"Please define all the environment variables JWT_SECRET, JWT_EXPIRES and PASSWORD_RESET_EXPIRES"`;

@@ -11,14 +11,19 @@ describe('environment', () => {
       // PASSWORD_RESET_EXPIRES:''
     };
 
-    try {
-      var initEnvironment = require('../environment').initEnvironment;
+    // try {
+    //   var initEnvironment = require('../environment').initEnvironment;
+    //   initEnvironment();
+    // } catch (e) {
+    //   expect(e.message).toEqual(
+    //     'Please define all the environment variables JWT_SECRET, JWT_EXPIRES and PASSWORD_RESET_EXPIRES',
+    //   );
+    // }
+
+    expect(async () => {
+      const initEnvironment = require('../environment').initEnvironment;
       initEnvironment();
-    } catch (e) {
-      expect(e.message).toEqual(
-        'Please define all the environment variables JWT_SECRET, JWT_EXPIRES and PASSWORD_RESET_EXPIRES',
-      );
-    }
+    }).rejects.toThrowErrorMatchingSnapshot();
   });
 
   it('should not throw an error if any of the required environments have been set', async () => {
@@ -28,8 +33,8 @@ describe('environment', () => {
       PASSWORD_RESET_EXPIRES: 'test',
     };
 
-    var initEnvironment = require('../environment').initEnvironment;
-    var { JWT_SECRET, JWT_EXPIRES, PASSWORD_RESET_EXPIRES } = require('../environment');
+    const initEnvironment = require('../environment').initEnvironment;
+    const { JWT_SECRET, JWT_EXPIRES, PASSWORD_RESET_EXPIRES } = require('../environment');
     initEnvironment();
 
     expect(JWT_SECRET).toEqual('test');

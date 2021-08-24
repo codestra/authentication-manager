@@ -9,7 +9,7 @@ import { PASSWORD_RESET_EXPIRES } from './environment';
  * @param {mongoose.Model} parameters.Model mongodb model
  * @param {string} parameters.variables.email the email for which we want to reset the password
  * @param {function({string}):void} parameters.onCompleted callback on completed. Returns the passwordResetToken
- * @returns {Promise<string | Error>} returns the reset token
+ * @returns {Promise<string>} returns the reset token
  */
 const modelRequestResetPassword = async ({
   Model,
@@ -19,7 +19,7 @@ const modelRequestResetPassword = async ({
   Model: mongoose.Model<any>;
   variables: { email: string };
   onCompleted?: ({ passwordResetToken }: { passwordResetToken: string }) => void;
-}): Promise<string | Error> => {
+}): Promise<string> => {
   try {
     const model = await Model.findOne({
       email: email.toLowerCase(),

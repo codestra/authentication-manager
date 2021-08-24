@@ -10,7 +10,7 @@ import { ERROR_TOKEN_EXPIRED } from './ErrorCodes';
  * @param {string} parameters.variables.password the new password
  * @param {string} parameters.variables.passwordResetToken the passwordResetToken
  * @param {function({string}):void} parameters.onCompleted callback on completed. Returns the e-mail.
- * @returns {Promise<string | Error>} the found email for which we want to resend the activation
+ * @returns {Promise<string>} the found email for which we want to resend the activation
  */
 
 const modelRequestUpdatePassword = async ({
@@ -21,7 +21,7 @@ const modelRequestUpdatePassword = async ({
   Model: mongoose.Model<any>;
   variables: { email: string; password: string; passwordResetToken: string };
   onCompleted?: ({ email }: { email: string }) => void;
-}): Promise<string | Error> => {
+}): Promise<string> => {
   try {
     // find the document
     const dateNow = Date.now();
@@ -35,10 +35,6 @@ const modelRequestUpdatePassword = async ({
     });
 
     if (!model) {
-      throw new Error(ERROR_TOKEN_EXPIRED);
-    }
-
-    if (model.passwordResetToken === undefined || model.passwordResetExpires === undefined) {
       throw new Error(ERROR_TOKEN_EXPIRED);
     }
 

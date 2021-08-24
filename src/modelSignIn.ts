@@ -12,7 +12,7 @@ import { ERROR_WRONG_CREDENTIALS, ERROR_ACCOUNT_NOT_ACTIVATED } from './ErrorCod
  * @param {string} parameters.variables.email the email
  * @param {string} parameters.variables.password the password
  * @param {function({string}):void} parameters.onCompleted callback on completed. Returns the jwt
- * @returns {Promise<string | Error>} the jwt for the authentication
+ * @returns {Promise<string>} the jwt for the authentication
  */
 const modelSignIn = async ({
   Model,

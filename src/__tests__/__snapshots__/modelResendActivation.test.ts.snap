@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modelSignUp should throw a error on wrong email 1`] = `"Error: ERROR_NOT_SPECIFIED"`;
