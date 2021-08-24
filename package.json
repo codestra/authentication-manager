@@ -1,6 +1,6 @@
 {
   "name": "@codestra/authentication-manager",
-  "version": "1.1.4",
+  "version": "1.0.0",
   "description": "Full authentication helper functions",
   "main": "lib/index.js",
   "scripts": {
@@ -14,7 +14,8 @@
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "badges": "auto-badger"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "@babel/preset-env": "^7.14.8",
     "@types/jsonwebtoken": "^8.5.5",
     "babel-jest": "^27.0.6",
+    "git-auto-badger": "^1.0.22",
     "jsonwebtoken": "^8.5.1",
     "mongodb-memory-server": "^7.3.2",
     "mongoose": "^5.13.3",
