@@ -1,3 +1,6 @@
+# @codestra/authentication-manager
+
+
 ## Functions
 
 <dl>

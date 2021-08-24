@@ -16,7 +16,7 @@
     "postversion": "git push && git push --tags",
     "dev": "tsc --watch",
     "badges": "auto-badger",
-    "build:doc": "jsdoc2md --files './src/**/*.ts' --configure ./jsdoc2md.json > api-documentation.md"
+    "build:doc": "jsdoc2md --partial main.hbs --files './src/**/*.ts' --configure ./jsdoc2md.json > README.md"
   },
   "repository": {
     "type": "git",
