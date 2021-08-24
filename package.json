@@ -1,6 +1,6 @@
 {
   "name": "@codestra/authentication-manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Full authentication helper functions",
   "main": "lib/index.js",
   "scripts": {
@@ -9,10 +9,10 @@
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src && npm run build:doc",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test && yarn lint",
+    "preversion": "yarn lint",
+    "version": "yarn format && git add -A src && yarn build:doc",
     "postversion": "git push && git push --tags",
     "dev": "tsc --watch",
     "badges": "auto-badger",
