@@ -24,4 +24,3 @@ jobs:
           yarn badges
           git add .
           git commit -m "generated README.md"
-          git push origin master
