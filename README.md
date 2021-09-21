@@ -1,27 +1,5 @@
 # @codestra/authentication-manager
 
-[//]: <> (start placeholder for auto-badger)
-
-
-[![Build Status](https://img.shields.io/github/workflow/status//codestra/Push%20on%20master?style=flat-square&color=%23007a1f)](https://github.com//codestra/actions)
-[![version](https://img.shields.io/npm/v/@codestra/authentication-manager.svg?style=flat-square)](https://npmjs.org/@codestra/authentication-manager)
-[![min size](https://img.shields.io/bundlephobia/min/@codestra/authentication-manager?style=flat-square)](https://bundlephobia.com/result?p=@codestra/authentication-manager)
-[![mingzip size](https://img.shields.io/bundlephobia/minzip/@codestra/authentication-manager)](https://bundlephobia.com/result?p=@codestra/authentication-manager)
-[![license](https://img.shields.io/npm/l/@codestra/authentication-manager?color=%23007a1f&style=flat-square)](https://github.com//codestra/blob/master/LICENSE)
-
-[![dependancies](https://img.shields.io/librariesio/release/npm/@codestra/authentication-manager?color=%23007a1f&style=flat-square)](https://libraries.io/npm/%40codestra%2Fauthentication-manager)
-[![downloads](https://img.shields.io/npm/dm/@codestra/authentication-manager?style=flat-square&color=%23007a1f)](https://npmcharts.com/compare/@codestra/authentication-manager)
-[![all contributors](https://img.shields.io/github/all-contributors//codestra?style=flat-square)](https://github.com//codestra/graphs/contributors)
-[![code of conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com//codestra/blob/master/CODE_OF_CONDUCT.md)
-
-[![stargazers](https://img.shields.io/github/stars//codestra?style=social)](https://github.com//codestra/stargazers)
-[![number of forks](https://img.shields.io/github/forks//codestra?style=social)](https://github.com//codestra/fork)
-
-###### :clap: & :heart: to [auto badger](https://github.com/technikhil314/auto-badger) for making badging simple
-
-[//]: <> (end placeholder for auto-badger)
-
-
 ## Functions
 
 <dl>
@@ -49,137 +27,134 @@ Will also make the email lowercase before trying to find the document.</p></dd>
 <a name="genRandomString"></a>
 
 ## genRandomString(length)
+
 <p>generates random string of characters i.e salt</p>
 
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
+| Param  | Type                | Description                         |
+| ------ | ------------------- | ----------------------------------- |
 | length | <code>number</code> | <p>Length of the random string.</p> |
 
 <a name="createHash"></a>
 
 ## createHash(password, salt)
+
 <p>hash password with sha512.</p>
 
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
+| Param    | Type                | Description                     |
+| -------- | ------------------- | ------------------------------- |
 | password | <code>string</code> | <p>List of required fields.</p> |
-| salt | <code>string</code> | <p>Data to be validated.</p> |
+| salt     | <code>string</code> | <p>Data to be validated.</p>    |
 
 <a name="createHash..hash"></a>
 
 ### createHash~hash
+
 <p>Gives us salt of length 16</p>
 
-**Kind**: inner constant of [<code>createHash</code>](#createHash)  
 <a name="modelActivate"></a>
 
 ## modelActivate(parameters) ⇒ <code>Promise.&lt;string&gt;</code>
+
 <p>Activates the model with the activationToken and returns the jwt.</p>
 
-**Kind**: global function  
-**Returns**: <code>Promise.&lt;string&gt;</code> - <p>the jwt for the authentication</p>  
+**Returns**: <code>Promise.&lt;string&gt;</code> - <p>the jwt for the authentication</p>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| parameters | <code>Object</code> | <p>function parameters</p> |
-| parameters.Model | <code>mongoose.Model</code> | <p>mongodb model</p> |
-| parameters.variables.activationToken | <code>string</code> | <p>the activation token for which model we want to activate the account</p> |
-| parameters.onCompleted | <code>function</code> | <p>callback on completed. Returns the token.</p> |
+| Param                                | Type                        | Description                                                                 |
+| ------------------------------------ | --------------------------- | --------------------------------------------------------------------------- |
+| parameters                           | <code>Object</code>         | <p>function parameters</p>                                                  |
+| parameters.Model                     | <code>mongoose.Model</code> | <p>mongodb model</p>                                                        |
+| parameters.variables.activationToken | <code>string</code>         | <p>the activation token for which model we want to activate the account</p> |
+| parameters.onCompleted               | <code>function</code>       | <p>callback on completed. Returns the token.</p>                            |
 
 <a name="modelRequestResetPassword"></a>
 
 ## modelRequestResetPassword(parameters) ⇒ <code>Promise.&lt;string&gt;</code>
+
 <p>Will update the reset token and send an email. If the user was found, will return passwordResetToken</p>
 
-**Kind**: global function  
-**Returns**: <code>Promise.&lt;string&gt;</code> - <p>returns the reset token</p>  
+**Returns**: <code>Promise.&lt;string&gt;</code> - <p>returns the reset token</p>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| parameters | <code>Object</code> | <p>function parameters</p> |
-| parameters.Model | <code>mongoose.Model</code> | <p>mongodb model</p> |
-| parameters.variables.email | <code>string</code> | <p>the email for which we want to reset the password</p> |
-| parameters.onCompleted | <code>function</code> | <p>callback on completed. Returns the passwordResetToken</p> |
+| Param                      | Type                        | Description                                                  |
+| -------------------------- | --------------------------- | ------------------------------------------------------------ |
+| parameters                 | <code>Object</code>         | <p>function parameters</p>                                   |
+| parameters.Model           | <code>mongoose.Model</code> | <p>mongodb model</p>                                         |
+| parameters.variables.email | <code>string</code>         | <p>the email for which we want to reset the password</p>     |
+| parameters.onCompleted     | <code>function</code>       | <p>callback on completed. Returns the passwordResetToken</p> |
 
 <a name="modelRequestUpdatePassword"></a>
 
 ## modelRequestUpdatePassword(parameters) ⇒ <code>Promise.&lt;string&gt;</code>
+
 <p>Will update the reset token and send an email. If the user was found, will return the mail</p>
 
-**Kind**: global function  
-**Returns**: <code>Promise.&lt;string&gt;</code> - <p>the found email for which we want to resend the activation</p>  
+**Returns**: <code>Promise.&lt;string&gt;</code> - <p>the found email for which we want to resend the activation</p>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| parameters | <code>Object</code> | <p>function parameters</p> |
-| parameters.Model | <code>mongoose.Model</code> | <p>mongodb model</p> |
-| parameters.variables.email | <code>string</code> | <p>the email for which we want to resend the activation</p> |
-| parameters.variables.password | <code>string</code> | <p>the new password</p> |
-| parameters.variables.passwordResetToken | <code>string</code> | <p>the passwordResetToken</p> |
-| parameters.onCompleted | <code>function</code> | <p>callback on completed. Returns the e-mail.</p> |
+| Param                                   | Type                        | Description                                                 |
+| --------------------------------------- | --------------------------- | ----------------------------------------------------------- |
+| parameters                              | <code>Object</code>         | <p>function parameters</p>                                  |
+| parameters.Model                        | <code>mongoose.Model</code> | <p>mongodb model</p>                                        |
+| parameters.variables.email              | <code>string</code>         | <p>the email for which we want to resend the activation</p> |
+| parameters.variables.password           | <code>string</code>         | <p>the new password</p>                                     |
+| parameters.variables.passwordResetToken | <code>string</code>         | <p>the passwordResetToken</p>                               |
+| parameters.onCompleted                  | <code>function</code>       | <p>callback on completed. Returns the e-mail.</p>           |
 
 <a name="modelResendActivation"></a>
 
 ## modelResendActivation(parameters) ⇒ <code>Promise.&lt;string&gt;</code>
+
 <p>Request the activation token.</p>
 
-**Kind**: global function  
-**Returns**: <code>Promise.&lt;string&gt;</code> - <p>the found email for which we want to resend the activation</p>  
+**Returns**: <code>Promise.&lt;string&gt;</code> - <p>the found email for which we want to resend the activation</p>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| parameters | <code>Object</code> | <p>function parameters</p> |
-| parameters.Model | <code>mongoose.Model</code> | <p>mongodb model</p> |
-| parameters.variables.email | <code>string</code> | <p>the email for which we want to resend the activation</p> |
-| parameters.onCompleted | <code>function</code> | <p>callback on completed. Returns the activationToken.</p> |
+| Param                      | Type                        | Description                                                 |
+| -------------------------- | --------------------------- | ----------------------------------------------------------- |
+| parameters                 | <code>Object</code>         | <p>function parameters</p>                                  |
+| parameters.Model           | <code>mongoose.Model</code> | <p>mongodb model</p>                                        |
+| parameters.variables.email | <code>string</code>         | <p>the email for which we want to resend the activation</p> |
+| parameters.onCompleted     | <code>function</code>       | <p>callback on completed. Returns the activationToken.</p>  |
 
 <a name="modelSignIn"></a>
 
 ## modelSignIn(parameters) ⇒ <code>Promise.&lt;string&gt;</code>
+
 <p>Signs in the model and sends back the jwt if the account is activated.
 Will also make the email lowercase before trying to find the document.</p>
 
-**Kind**: global function  
-**Returns**: <code>Promise.&lt;string&gt;</code> - <p>the jwt for the authentication</p>  
+**Returns**: <code>Promise.&lt;string&gt;</code> - <p>the jwt for the authentication</p>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| parameters | <code>Object</code> | <p>function parameters</p> |
-| parameters.Model | <code>mongoose.Model</code> | <p>mongodb model</p> |
-| parameters.variables.email | <code>string</code> | <p>the email</p> |
-| parameters.variables.password | <code>string</code> | <p>the password</p> |
-| parameters.onCompleted | <code>function</code> | <p>callback on completed. Returns the jwt</p> |
+| Param                         | Type                        | Description                                   |
+| ----------------------------- | --------------------------- | --------------------------------------------- |
+| parameters                    | <code>Object</code>         | <p>function parameters</p>                    |
+| parameters.Model              | <code>mongoose.Model</code> | <p>mongodb model</p>                          |
+| parameters.variables.email    | <code>string</code>         | <p>the email</p>                              |
+| parameters.variables.password | <code>string</code>         | <p>the password</p>                           |
+| parameters.onCompleted        | <code>function</code>       | <p>callback on completed. Returns the jwt</p> |
 
 <a name="modelSignUp"></a>
 
 ## modelSignUp(parameters) ⇒ <code>Promise.&lt;{activationToken: string, \_id: string}&gt;</code>
+
 <p>Creates a new document based on the supplied model the email and password. Will return the new _id</p>
 
-**Kind**: global function  
-**Returns**: <code>Promise.&lt;{activationToken: string, \_id: string}&gt;</code> - <p>the _id as a string</p>  
+**Returns**: <code>Promise.&lt;{activationToken: string, \_id: string}&gt;</code> - <p>the \_id as a string</p>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| parameters | <code>Object</code> | <p>function parameters</p> |
-| parameters.Model | <code>mongoose.Model</code> | <p>mongodb model</p> |
-| parameters.variables.email | <code>string</code> | <p>the email which will be used for registration made lowercase</p> |
-| parameters.variables.password | <code>string</code> | <p>the password</p> |
-| parameters.onCompleted | <code>function</code> | <p>callback on completed. Returns the _id</p> |
+| Param                         | Type                        | Description                                                         |
+| ----------------------------- | --------------------------- | ------------------------------------------------------------------- |
+| parameters                    | <code>Object</code>         | <p>function parameters</p>                                          |
+| parameters.Model              | <code>mongoose.Model</code> | <p>mongodb model</p>                                                |
+| parameters.variables.email    | <code>string</code>         | <p>the email which will be used for registration made lowercase</p> |
+| parameters.variables.password | <code>string</code>         | <p>the password</p>                                                 |
+| parameters.onCompleted        | <code>function</code>       | <p>callback on completed. Returns the \_id</p>                      |
 
 <a name="modelVerify"></a>
 
 ## modelVerify(parameters) ⇒ <code>JwtPayload</code> \| <code>null</code>
+
 <p>Verifies the token</p>
 
-**Kind**: global function  
-**Returns**: <code>JwtPayload</code> \| <code>null</code> - <p>the jwt for the authentication. If verified correctly, returns {id} so for mongoose, you need to make it _id</p>  
+**Returns**: <code>JwtPayload</code> \| <code>null</code> - <p>the jwt for the authentication. If verified correctly, returns {id} so for mongoose, you need to make it \_id</p>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| parameters | <code>Object</code> | <p>function parameters</p> |
-| parameters.token | <code>string</code> | <p>mongodb model</p> |
-
+| Param            | Type                | Description                |
+| ---------------- | ------------------- | -------------------------- |
+| parameters       | <code>Object</code> | <p>function parameters</p> |
+| parameters.token | <code>string</code> | <p>mongodb model</p>       |
