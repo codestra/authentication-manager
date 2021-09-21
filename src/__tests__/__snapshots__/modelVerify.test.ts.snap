@@ -1,12 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`modelSignUp throw an error when no activation token was found 1`] = `"Error: MOCKED_ERROR"`;
-
-exports[`modelSignUp throw an error when no activation token was found 2`] = `
-Object {
-  "email": "sajad.ghawami1@codestra.io",
-  "exp": 317174244627,
-  "iat": 1629802227,
-  "id": "6124cef3476016c5519b11e4",
-}
-`;
