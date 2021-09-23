@@ -4,17 +4,18 @@ import { createHash } from './crypotography/hashing';
 import { ERROR_DUPLICATE_EMAIL } from './ErrorCodes';
 
 /**
- * Creates a new document based on the supplied model the email and password. Will return the new _id
+ * Creates a new document based on the supplied model the email, password and other fields.
+ * Will return the new _id and the activationtoken
  * @param {Object} parameters - function parameters
  * @param {mongoose.Model} parameters.Model mongodb model
  * @param {string} parameters.variables.email the email which will be used for registration made lowercase
  * @param {string} parameters.variables.password the password
  * @param {function({string, string}):void}  parameters.onCompleted callback on completed. Returns the _id
- * @returns {Promise<{ activationToken: string, _id: string }>} the _id as a string
+ * @returns {Promise<{ activationToken: string, _id: string }>} the activationtoken and _id  as a string
  */
 const modelSignUp = async ({
   Model,
-  variables: { password, email },
+  variables: { password, email, ...rest },
   onCompleted,
 }: {
   Model: mongoose.Model<any>;
@@ -34,6 +35,7 @@ const modelSignUp = async ({
       salt: hashedObject.salt,
       activated: false,
       activationToken,
+      ...rest,
     };
 
     const model = await Model.create(modelData);
