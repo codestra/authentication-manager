@@ -1,6 +1,6 @@
 {
   "name": "@codestra/authentication-manager",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Full authentication helper functions",
   "main": "lib/index.js",
   "scripts": {
