@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { randomBytes } from 'crypto';
 import { createHash } from './crypotography/hashing';
-import { ERROR_DUPLICATE_EMAIL } from './ErrorCodes';
 
 /**
  * Creates a new document based on the supplied model the email, password and other fields.
@@ -45,10 +44,6 @@ const modelSignUp = async ({
     }
     return { _id: model._id.toString(), activationToken };
   } catch (error: any) {
-    // duplicate key
-    if (error.code === 11000) {
-      throw new Error(ERROR_DUPLICATE_EMAIL);
-    }
     throw new Error(error);
   }
 };

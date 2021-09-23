@@ -1,7 +1,5 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
-const { JWT_SECRET } = process.env;
-
 /**
  * Verifies the token
  * @param {Object} parameters - function parameters
@@ -11,11 +9,11 @@ const { JWT_SECRET } = process.env;
 const modelVerify = ({ token }: { token: string | undefined }): {} | JwtPayload | null | Error => {
   try {
     if (token) {
-      const verify = jwt.verify(token, JWT_SECRET!);
+      const verify = jwt.verify(token, process.env.JWT_SECRET!);
       return verify;
     }
     return null;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error);
   }
 };

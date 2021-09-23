@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`modelSignUp should throw an duplicate key error 1`] = `"ERROR_DUPLICATE_EMAIL"`;
+exports[`modelSignUp should throw an duplicate key error 1`] = `"MongoError: E11000 duplicate key error dup key: { : \\"sajad.ghawami@codestra.io\\" }"`;
 
 exports[`modelSignUp should throw an error 1`] = `"Error: MOCKED_ERROR"`;

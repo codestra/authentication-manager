@@ -32,9 +32,9 @@ const modelSignIn = async ({
       throw new Error(ERROR_WRONG_CREDENTIALS);
     }
 
-    if (model.activated === false) {
-      throw new Error(ERROR_ACCOUNT_NOT_ACTIVATED);
-    }
+    // if (model.activated === false) {
+    //   throw new Error(ERROR_ACCOUNT_NOT_ACTIVATED);
+    // }
 
     const validatePassword: any = validateHash(password, model.salt!).password;
     const verifyPassword: boolean = validatePassword === model.password;

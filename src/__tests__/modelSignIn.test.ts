@@ -20,19 +20,20 @@ describe('modelSignUp', () => {
     }
   });
 
-  it('should sign in the model but throw an error when not activated', async () => {
-    await modelSignUp({
-      Model: MockModel,
-      variables: { email: 'sajad.ghawami@codestra.io', password: '123123' },
-    });
+  // Removed this, because we dont check if we are activated
+  // it('should sign in the model but throw an error when not activated', async () => {
+  //   await modelSignUp({
+  //     Model: MockModel,
+  //     variables: { email: 'sajad.ghawami@codestra.io', password: '123123' },
+  //   });
 
-    await expect(async () => {
-      await modelSignIn({
-        Model: MockModel,
-        variables: { email: 'sajad.ghawami@codestra.io', password: '123123' },
-      });
-    }).rejects.toThrowErrorMatchingSnapshot();
-  });
+  //   await expect(async () => {
+  //     await modelSignIn({
+  //       Model: MockModel,
+  //       variables: { email: 'sajad.ghawami@codestra.io', password: '123123' },
+  //     });
+  //   }).rejects.toThrowErrorMatchingSnapshot();
+  // });
 
   it('should sign in the model', async () => {
     const data = await modelSignUp({
