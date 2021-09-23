@@ -20,7 +20,8 @@
 <dd><p>Signs in the model and sends back the jwt if the account is activated.
 Will also make the email lowercase before trying to find the document.</p></dd>
 <dt><a href="#modelSignUp">modelSignUp(parameters)</a> ⇒ <code>Promise.&lt;{activationToken: string, _id: string}&gt;</code></dt>
-<dd><p>Creates a new document based on the supplied model the email and password. Will return the new _id</p></dd>
+<dd><p>Creates a new document based on the supplied model the email, password and other fields.
+Will return the new _id and the activationtoken</p></dd>
 <dt><a href="#modelVerify">modelVerify(parameters)</a> ⇒ <code>JwtPayload</code> | <code>null</code></dt>
 <dd><p>Verifies the token</p></dd>
 </dl>
@@ -128,9 +129,10 @@ Will also make the email lowercase before trying to find the document.</p>
 <a name="modelSignUp"></a>
 
 ## modelSignUp(parameters) ⇒ <code>Promise.&lt;{activationToken: string, \_id: string}&gt;</code>
-<p>Creates a new document based on the supplied model the email and password. Will return the new _id</p>
+<p>Creates a new document based on the supplied model the email, password and other fields.
+Will return the new _id and the activationtoken</p>
 
-**Returns**: <code>Promise.&lt;{activationToken: string, \_id: string}&gt;</code> - <p>the _id as a string</p>  
+**Returns**: <code>Promise.&lt;{activationToken: string, \_id: string}&gt;</code> - <p>the activationtoken and _id  as a string</p>  
 
 | Param | Type | Description |
 | --- | --- | --- |
