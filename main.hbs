@@ -2,7 +2,91 @@
 
 {{!-- [//]: <> (start placeholder for auto-badger) --}}
 
+authentication-manager is a package that provides helper functions for user management.
+
+## Installation
+
+Use [npm](https://nodejs.org/en/download/) for installation:
+
+```bash
+npm install @codestra/authentication-manager
+```
+
+Or use [yarn](https://yarnpkg.com/) for installation:
+
+```bash
+yarn add @codestra/authentication-manager
+```
+
+## Usage
+
+You need to have a running mongoose connection.
+
+### Example
+
+The following is a full example of all the functions and how you can use them.
+
+```javascript
+
+// The model needs to at least have these fields
+const UserSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  salt: { type: String },
+  passwordResetToken: { type: String },
+  passwordResetExpires: { type: Number },
+  activated: { type: Boolean },
+  activationToken: { type: String },
+});
+
+const User = mongoose.model('User', UserSchema);
+
+// creates a new user and returns the _id and activationToken
+const { _id, activationToken } = await modelSignUp({
+    Model: User,
+    variables: { email: 'foo@bar.io', password: 'verymuchsecure' },
+});
+
+// activates the user with the activation token and returns a authentication token
+const authenticationTokenActivate = await modelActivate({
+    Model: User,
+    variables: { activationToken: data.activationToken },
+});
+
+// returns the authentication token if the password was right
+const authenticationTokenSignIn = await modelSignIn({
+    Model: User,
+    variables: { email: 'foo@bar.io', password: 'verymuchsecure' },
+});
+
+// verifies the authentication token
+const authentication = modelVerify({ token: authenticationTokenActivate })
+
+// returns a password reset token that we need to give the user to reset
+const passwordResetToken = await modelRequestResetPassword({
+    Model: User,
+    variables: { email: 'foo@bar.io' },
+});
+
+// verifies that the password reset token was right and sets the new password
+const email = await modelRequestUpdatePassword({
+    Model: Vendor,
+    variables: { passwordResetToken, email: 'foo@bar.io', password: 'newverysecure' },
+});
+
+```
+
+
 {{>main-index~}}
 {{>all-docs~}}
 {{>scope~}}
 
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
