@@ -1,8 +1,14 @@
-# name: Push on master
-# on:
-#   push:
-#     branches:
-#       - master
+name: Push on master
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest 
+    steps:
+      - run: ls
 
 # jobs:
 #   generate-readme:
