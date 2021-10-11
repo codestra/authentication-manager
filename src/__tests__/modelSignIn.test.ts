@@ -41,17 +41,18 @@ describe('modelSignUp', () => {
       variables: { email: 'sajad.ghawami1@codestra.io', password: '123123' },
     });
 
-    const token1 = await modelActivate({
+    const activateToken = await modelActivate({
       Model: MockModel,
       variables: { activationToken: data.activationToken },
     });
 
-    const token2 = await modelSignIn({
+    const { token, _id } = await modelSignIn({
       Model: MockModel,
       variables: { email: 'sajad.ghawami1@codestra.io', password: '123123' },
     });
 
-    expect(token1).toEqual(token2);
+    expect(activateToken).toEqual(token);
+    expect(data._id).toBe(_id);
   });
 
   it('should sign in the activated model and call the onCompleted', async () => {

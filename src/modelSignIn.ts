@@ -12,7 +12,7 @@ import { ERROR_WRONG_CREDENTIALS, ERROR_ACCOUNT_NOT_ACTIVATED } from './ErrorCod
  * @param {string} parameters.variables.email the email
  * @param {string} parameters.variables.password the password
  * @param {function({string}):void} parameters.onCompleted callback on completed. Returns the jwt
- * @returns {Promise<string>} the jwt for the authentication
+ * @returns {Promise<{ token: string, _id: string }>} the authentication token and the _id of the new document as a string
  */
 const modelSignIn = async ({
   Model,
@@ -21,8 +21,8 @@ const modelSignIn = async ({
 }: {
   Model: mongoose.Model<any>;
   variables: { email: string; password: string };
-  onCompleted?: ({ token }: { token: string }) => void;
-}): Promise<string | Error> => {
+  onCompleted?: ({ token, _id }: { token: string; _id: string }) => void;
+}): Promise<{ token: string; _id: string }> => {
   try {
     const model = await Model.findOne({
       email: email.toLowerCase(),
@@ -31,10 +31,6 @@ const modelSignIn = async ({
     if (!model) {
       throw new Error(ERROR_WRONG_CREDENTIALS);
     }
-
-    // if (model.activated === false) {
-    //   throw new Error(ERROR_ACCOUNT_NOT_ACTIVATED);
-    // }
 
     const validatePassword: any = validateHash(password, model.salt!).password;
     const verifyPassword: boolean = validatePassword === model.password;
@@ -54,9 +50,9 @@ const modelSignIn = async ({
       },
     );
     if (onCompleted) {
-      onCompleted({ token });
+      onCompleted({ token, _id: model._id.toString() });
     }
-    return token;
+    return { token, _id: model._id.toString() };
   } catch (error: any) {
     throw new Error(error);
   }
