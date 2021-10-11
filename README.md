@@ -37,8 +37,8 @@ const UserSchema = new mongoose.Schema({
 });
 const User = mongoose.model('User', UserSchema);
 
-// creates a new user and returns the _id and activationToken
-const { _id, activationToken } = await modelSignUp({
+// creates a new user and returns the modelSignUpData._id and modelSignUpData.activationToken
+const modelSignUpData = await modelSignUp({
   Model: User,
   variables: { email: 'foo@bar.io', password: 'verymuchsecure' },
 });
@@ -46,17 +46,19 @@ const { _id, activationToken } = await modelSignUp({
 // activates the user with the activation token and returns a authentication token
 const authenticationTokenActivate = await modelActivate({
   Model: User,
-  variables: { activationToken: data.activationToken },
+  variables: { activationToken: modelSignUpData.activationToken },
 });
 
-// returns the authentication token if the password was right
-const authenticationTokenSignIn = await modelSignIn({
+// returns the authentication modelSignInData.token and modelSignInData._id if the password was right
+const modelSignInData = await modelSignIn({
   Model: User,
   variables: { email: 'foo@bar.io', password: 'verymuchsecure' },
 });
 
 // verifies the authentication token
-const authentication = modelVerify({ token: authenticationTokenActivate });
+const authentication1 = modelVerify({ token: authenticationTokenActivate });
+// or
+const authentication2 = modelVerify({ token: modelSignInData.token });
 
 // returns a password reset token that we need to give the user to reset
 const passwordResetToken = await modelRequestResetPassword({
