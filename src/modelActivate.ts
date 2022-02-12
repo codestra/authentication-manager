@@ -7,21 +7,22 @@ import jwt from 'jsonwebtoken';
  * Activates the model with the activationToken and returns the jwt.
  * @param {Object} parameters - function parameters
  * @param {mongoose.Model} parameters.Model mongodb model
+ * @param {string | undefined} parameters.variables.field which field to use for the activationtoken
  * @param {string} parameters.variables.activationToken the activation token for which model we want to activate the account
  * @param {function({token: string}):void} parameters.onCompleted callback on completed. Returns the token.
  * @returns {Promise<string>} the jwt for the authentication
  */
 const modelActivate = async ({
   Model,
-  variables: { activationToken },
+  variables: { field = 'activationToken', activationToken },
   onCompleted,
 }: {
   Model: mongoose.Model<any>;
-  variables: { activationToken: string };
+  variables: { field?: string; activationToken: string };
   onCompleted?: ({ token }: { token: string }) => void;
 }): Promise<string | undefined> => {
   const model = await Model.findOne({
-    activationToken,
+    [`${field}`]: activationToken,
   });
 
   if (model) {
