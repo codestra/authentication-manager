@@ -21,7 +21,6 @@ const modelActivate = async ({
   onCompleted?: ({ token }: { token: string }) => void;
 }): Promise<string> => {
   const model = await Model.findOne({
-    activated: false,
     activationToken,
   });
 
