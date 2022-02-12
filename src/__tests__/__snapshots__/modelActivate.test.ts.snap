@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`modelSignUp throw an error when no activation token was found 1`] = `"ERROR_NOT_SPECIFIED"`;

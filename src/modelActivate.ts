@@ -19,35 +19,33 @@ const modelActivate = async ({
   Model: mongoose.Model<any>;
   variables: { activationToken: string };
   onCompleted?: ({ token }: { token: string }) => void;
-}): Promise<string> => {
+}): Promise<string | undefined> => {
   const model = await Model.findOne({
     activationToken,
   });
 
-  if (!model) {
-    // TODO: Token expired error
-    throw new Error(ERROR_NOT_SPECIFIED);
+  if (model) {
+    await model.update({
+      activated: true,
+    });
+
+    const token = jwt.sign(
+      {
+        id: model._id,
+        email: model.email,
+      },
+      JWT_SECRET!,
+      {
+        expiresIn: JWT_EXPIRES!, // token will expire in 30days
+      },
+    );
+
+    if (onCompleted) {
+      onCompleted({ token });
+    }
+    return token;
   }
-
-  await model.update({
-    activated: true,
-  });
-
-  const token = jwt.sign(
-    {
-      id: model._id,
-      email: model.email,
-    },
-    JWT_SECRET!,
-    {
-      expiresIn: JWT_EXPIRES!, // token will expire in 30days
-    },
-  );
-
-  if (onCompleted) {
-    onCompleted({ token });
-  }
-  return token;
+  return undefined;
 };
 
 export default modelActivate;
