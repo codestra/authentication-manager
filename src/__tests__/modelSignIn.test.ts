@@ -33,7 +33,7 @@ describe('modelSignUp', () => {
 
     const { token, _id } = await modelSignIn({
       Model: MockModel,
-      variables: { email: 'sajad.ghawami1@codestra.io', password: '123123' },
+      variables: { filter: { email: 'sajad.ghawami1@codestra.io' }, password: '123123' },
     });
 
     expect(activateToken).toEqual(token);
@@ -44,7 +44,7 @@ describe('modelSignUp', () => {
     const onCompleted = jest.fn();
     await modelSignIn({
       Model: MockModel,
-      variables: { email: 'sajad.ghawami1@codestra.io', password: '123123' },
+      variables: { filter: { email: 'sajad.ghawami1@codestra.io' }, password: '123123' },
       onCompleted,
     });
 
@@ -55,14 +55,14 @@ describe('modelSignUp', () => {
     await expect(async () => {
       await modelSignIn({
         Model: MockModel,
-        variables: { email: 'sajad.ghawami1@codestra.io', password: '123' },
+        variables: { filter: { email: 'sajad.ghawami1@codestra.io' }, password: '123' },
       });
     }).rejects.toThrowErrorMatchingSnapshot();
 
     await expect(async () => {
       await modelSignIn({
         Model: MockModel,
-        variables: { email: 'sajad.ghawami2@codestra.io', password: '123123' },
+        variables: { filter: { email: 'sajad.ghawami2@codestra.io' }, password: '123123' },
       });
     }).rejects.toThrowErrorMatchingSnapshot();
   });

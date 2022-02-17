@@ -9,23 +9,25 @@ import { ERROR_WRONG_CREDENTIALS, ERROR_ACCOUNT_NOT_ACTIVATED } from './ErrorCod
  * Will also make the email lowercase before trying to find the document.
  * @param {Object} parameters - function parameters
  * @param {mongoose.Model} parameters.Model mongodb model
- * @param {string} parameters.variables.email the email
+ * * @param {string} parameters.variables.email the email
+ * @param {string} parameters.variables.filter other filters
  * @param {string} parameters.variables.password the password
  * @param {function({string}):void} parameters.onCompleted callback on completed. Returns the jwt
  * @returns {Promise<{ token: string, _id: string }>} the authentication token and the _id of the new document as a string
  */
 const modelSignIn = async ({
   Model,
-  variables: { email, password },
+  variables: { filter, password },
   onCompleted,
 }: {
   Model: mongoose.Model<any>;
-  variables: { email: string; password: string };
+  variables: { filter: { email: string; [key: string]: any }; password: string };
   onCompleted?: ({ token, _id }: { token: string; _id: string }) => void;
 }): Promise<{ token: string; _id: string }> => {
   try {
     const model = await Model.findOne({
-      email: email.toLowerCase(),
+      ...filter,
+      email: filter.email.toLowerCase(),
     }).lean();
 
     if (!model) {
